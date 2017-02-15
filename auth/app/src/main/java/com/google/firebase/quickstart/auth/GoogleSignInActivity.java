@@ -29,8 +29,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -78,10 +80,18 @@ public class GoogleSignInActivity extends BaseActivity implements
 
         // [START config_signin]
         // Configure Google Sign In
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestScopes(new Scope(Scopes.PLUS_LOGIN))
+                .requestScopes(new Scope(Scopes.PLUS_ME))
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
         // [END config_signin]
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
